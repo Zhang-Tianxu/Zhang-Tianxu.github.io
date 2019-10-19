@@ -408,7 +408,7 @@ gitment:
   cleanly: true # Hide 'Powered by ...' on footer, and more
   language: en # Force language, or auto switch by theme
   github_user: 19359257 # MUST HAVE, Your Github ID
-  github_repo: Zhang-Tianxu.github.io # MUST HAVE, The repo you use to store Gitment comments
+  github_repo: wxPythonDemo # MUST HAVE, The repo you use to store Gitment comments
   client_id: 4be48e3d53c9cf1b4a35 # MUST HAVE, Github client id for the Gitment
   client_secret: 6ef4cf40fbe89aef1c54e924dd3d0ddce3e32764 # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
