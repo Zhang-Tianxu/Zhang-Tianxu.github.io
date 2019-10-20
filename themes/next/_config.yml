@@ -100,6 +100,7 @@ menu:
   # schedule: /schedule/|| calendar
   #sitemap: /sitemap.xml|| sitemap
   #commonweal: /404/ || heartbeat
+  chinese: /chinese/|| language
 
 # Enable/Disable menu icons.
 menu_icons:
@@ -128,7 +129,7 @@ scheme: Gemini
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
     #GitHub: https://github.com/Zhang-Tianxu  || github
-  E-Mail: mailto:zhangtianxu@sjtu.edu.cn || envelope
+  E-Mail: mailto:hanerzamora@gmail.com || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
