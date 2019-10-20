@@ -19,3 +19,12 @@ deploy:
   on:
     branch: hexo
   local-dir: public
+
+notifications:
+   email:
+     recipients:
+       - hanerzamora@gmail.com
+         #-
+     on_success: never # default: change
+     #on_success: change # default: change
+     on_failure: always # default: always
