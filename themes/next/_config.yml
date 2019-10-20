@@ -97,7 +97,7 @@ menu:
   tags: /tags/|| tags
   categories: /categories/|| th
   archives: /archives/|| archive
-  schedule: /schedule/|| calendar
+  # schedule: /schedule/|| calendar
   #sitemap: /sitemap.xml|| sitemap
   #commonweal: /404/ || heartbeat
 
@@ -401,7 +401,7 @@ valine:
 # Introduction: https://imsun.net/posts/gitment-introduction/
 # You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
-  enable: true
+  enable: false
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: true # Comments lazy loading with a button
@@ -409,8 +409,8 @@ gitment:
   language: en # Force language, or auto switch by theme
   github_user: 19359257 # MUST HAVE, Your Github ID
   github_repo: wxPythonDemo # MUST HAVE, The repo you use to store Gitment comments
-  client_id: 4be48e3d53c9cf1b4a35 # MUST HAVE, Github client id for the Gitment
-  client_secret: 6ef4cf40fbe89aef1c54e924dd3d0ddce3e32764 # EITHER this or proxy_gateway, Github access secret token for the Gitment
+  client_id:  # MUST HAVE, Github client id for the Gitment
+  client_secret:  # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 
