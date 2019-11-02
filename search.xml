@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Google Kick Start 2018 Round A: Even Digits</title>
+    <url>/2019/11/01/Google-Kick-Start-2018-Round-A-Even-Digits/</url>
+    <content><![CDATA[<h1 id="Google-Kick-Start-2018-Round-A-Even-Digits"><a href="#Google-Kick-Start-2018-Round-A-Even-Digits" class="headerlink" title="Google Kick Start 2018 Round A: Even Digits"></a>Google Kick Start 2018 Round A: Even Digits</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Supervin has a unique calculator. This calculator only has a display, a plus button, and a minus button. Currently, the integer <strong>N</strong> is displayed on the calculator display.</p>
+<p>Pressing the plus button increases the current number displayed on the calculator display by 1. Similarly, pressing the minus button decreases the current number displayed on the calculator display by 1. The calculator does not display any leading zeros. For example, if <code>100</code> is displayed on the calculator display, pressing the minus button once will cause the calculator to display <code>99</code>.</p>
+<p>Supervin does not like odd digits, because he thinks they are “odd”. Therefore, he wants to display an integer with only even digits in its decimal representation, using only the calculator buttons. Since the calculator is a bit old and the buttons are hard to press, he wants to use a minimal number of button presses.</p>
+<p>Please help Supervin to determine the minimum number of button presses to make the calculator display an integer with no odd digits.</p>
+<a id="more"></a>
+
+
+
+<p><strong>input:</strong></p>
+<p>The first line of the input gives the number of test cases, <strong>T</strong>. <strong>T</strong> test cases follow. Each begins with one line containing an integer <strong>N</strong>: the integer initially displayed on Supervin’s calculator.</p>
+<p><strong>output:</strong></p>
+<p>For each test case, output one line containing <code>Case #x: y</code>, where <code>x</code> is the test case number (starting from 1) and <code>y</code> is the minimum number of button presses, as described above.</p>
+<p><strong>limits:</strong></p>
+<p>1 ≤ <strong>T</strong> ≤ 100.<br>Time limit: 20 seconds per test set.<br>Memory limit: 1GB.</p>
+<p>Small dataset (Test set 1 - Visible)</p>
+<p>1 ≤ <strong>N</strong> ≤ 105.</p>
+<p>Large dataset (Test set 2 - Hidden)</p>
+<p>1 ≤ <strong>N</strong> ≤ 1016.</p>
+<p><strong>sample:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4<br />42<br />11<br />1<br />2018</td>
+<td>Case #1: 0 <br />Case #2: 3 <br />Case #3: 1 <br />Case #4: 2</td>
+</tr>
+</tbody></table>
+<h2 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h2><ol>
+<li>find 2 numbers, whose all digits are even, closest to <strong>N</strong> on both sides, namely <code>b</code> and <code>s</code>, <code>b</code> is bigger than <strong>N</strong>, <code>s</code> is smaller than <strong>N</strong>. Process as follows:<ol>
+<li>find highest odd digit in N, if N = 4389901, then highest odd digit is 3.</li>
+<li>highest odd digit minus 1, and set all digits below to 8, then we get <code>s</code>. If N = 4389901, then <code>s</code> = 4288888.</li>
+<li>highest odd digit plus 1, and set all digits below to 0, in most cases, we get <code>b</code>. If N = 4389901, then <code>b</code> = 4400000</li>
+<li>in 3 I said in most cases, because if highest odd digit is 9, we can’t get <code>b</code> by 3’s method. But fortunately if highest odd digit is 9, <code>b - N &gt; N -s</code>. Means we needn’t condider <code>b</code>.</li>
+</ol>
+</li>
+<li>Print <code>min(b - N, N - s)</code></li>
+</ol>
+<p>I am not satisfied with this method, because it’s not a universal method like knapsack problem.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_highest_odd_bit</span><span class="params">(num)</span>:</span></span><br><span class="line">    h_odd_bit = <span class="number">0</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(num):</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (num % <span class="number">10</span>) % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">and</span> count &gt; h_odd_bit:</span><br><span class="line">            h_odd_bit = count</span><br><span class="line">        num = int(num/<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">return</span> h_odd_bit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">num_tail</span><span class="params">(num,bit)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> num % <span class="number">10</span>**bit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">n_8</span><span class="params">(n)</span>:</span></span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(n):</span><br><span class="line">        result += <span class="number">8</span> * <span class="number">10</span>**(n<span class="number">-1</span>)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">even_digits</span><span class="params">(num,t)</span>:</span></span><br><span class="line">    highest_odd_bit = find_highest_odd_bit(num)</span><br><span class="line">    <span class="keyword">if</span>(highest_odd_bit == <span class="number">0</span>):</span><br><span class="line">        print(<span class="string">"Case #&#123;&#125;: &#123;&#125;"</span>.format(t,<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment">#print(str(num)[-highest_odd_bit])</span></span><br><span class="line">    n_tail1 = num_tail(num,highest_odd_bit - <span class="number">1</span>)</span><br><span class="line">    n_tail2 = n_tail1 + <span class="number">10</span>**(highest_odd_bit - <span class="number">1</span>)</span><br><span class="line">    <span class="comment">#n_tail2 = num_tail(num,highest_odd_bit)</span></span><br><span class="line">    top = <span class="number">10</span>**(highest_odd_bit<span class="number">-1</span>)</span><br><span class="line">    bottom = n_8(highest_odd_bit - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>(int(str(num)[-highest_odd_bit]) == <span class="number">9</span>):</span><br><span class="line">        print(<span class="string">"Case #&#123;&#125;: &#123;&#125;"</span>.format(t,n_tail2 - bottom))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Case #&#123;&#125;: &#123;&#125;"</span>.format(t,min(top - n_tail1,n_tail2 - bottom)))</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    T = int(input())</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(T):</span><br><span class="line">        n = int(input())</span><br><span class="line">        even_digits(n,i+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Google Kick Start</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Producer-consumer problem solution in C</title>
     <url>/2019/10/21/Producer-consumer-problem-solution-in-C/</url>
     <content><![CDATA[<h1 id="Producer-consumer-problem-multiprocessing-solution-in-C-with-details"><a href="#Producer-consumer-problem-multiprocessing-solution-in-C-with-details" class="headerlink" title="Producer-consumer problem multiprocessing solution in C with details"></a>Producer-consumer problem multiprocessing solution in C with details</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p><a href="[https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem](https://en.wikipedia.org/wiki/Producer–consumer_problem)"><strong>Producer-consumer problem</strong></a> is a classical problem in concurrency programming, I want to solve it by multiprocessing method. Multiprocessing method need more knowledges than multithreading method, because different process need to communicate with each other. </p>
@@ -76,8 +133,8 @@
         <category>Python</category>
       </categories>
       <tags>
-        <tag>concurrency</tag>
         <tag>Python</tag>
+        <tag>concurrency</tag>
         <tag>multithreading</tag>
       </tags>
   </entry>
