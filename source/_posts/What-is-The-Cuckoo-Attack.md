@@ -14,6 +14,8 @@ categories:
 
 The cuckoo bird replaces other birds’ eggs with its own. The victim birds are tricked into feeding the cuckoo chick as if it were their own.Similarly, in a cuckoo attack, the attacker “replaces” the victim’s [TEE](https://en.wikipedia.org/wiki/Trusted_execution_environment) with his own TEE, leading the victim to treat the attacker’s TEE as his own.
 
+<!--more-->
+
 Specifically, **the attacker try to convinces the victim that a TEE physically controled by the adversary resides in the victim's own local computer**.
 
 How it can be achieved?
