@@ -407,19 +407,14 @@
 
       
         
-          
-            <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The cuckoo bird replaces other birds’ eggs with its own. The victim birds are tricked into feeding the cuckoo chick as if it were their own.Similarly, in a cuckoo attack, the attacker “replaces” the victim’s <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment" target="_blank" rel="noopener">TEE</a> with his own TEE, leading the victim to treat the attacker’s TEE as his own.</p>
-<p>Specifically, <strong>the attacker try to convinces the victim that a TEE physically controled by the adversary resides in the victim’s own local computer</strong>.</p>
-<p>How it can be achieved?</p>
-<p>In most TEE’s protocal, attestation for TEE is achieved by special TEE, the special TEE only certifies that the code is running on <em>some</em> genuine TEE processor, but it does not guarantee that where is the processor actually located. Adversary can take advantage of this shortcoming to achieve cuckoo attack.</p>
-<p>In the following picture, there is a malware on the victim’s computer, it proxies all messages between user and TEE in his machine. When user want to attestation a TEE on his own computer, the malware intercept this message and forward to TEE on attacker’s machine, and then a special TEE on attacker’s computer generate a proof to prove the TEE on attacker’s machine is an authentic TEE.</p>
-<p>As a result, the victim are convinced that the TEE on attacker’s machine resides in his own local computer, and trust it. In this case, Any secrets victim enters can be forwarded to attacker’s TEE, attacker can steal the secrets by some means (such as phycial means).</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg35tanyf3j31wk0u0dk5.jpg" alt="image-20200624101517944"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
-<li>Parno, Bryan. “Bootstrapping Trust in a” Trusted” Platform.” HotSec. 2008.</li>
-</ol>
-
-          
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The cuckoo bird replaces other birds’ eggs with its own. The victim birds are tricked into feeding the cuckoo chick as if it were their own.Similarly, in a cuckoo attack, the attacker “replaces” the victim’s <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment" target="_blank" rel="noopener">TEE</a> with his own TEE, leading the victim to treat the attacker’s TEE as his own.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/24/What-is-The-Cuckoo-Attack/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

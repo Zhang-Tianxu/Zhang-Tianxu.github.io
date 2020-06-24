@@ -61,6 +61,8 @@
     <title>What is The Cuckoo Attack</title>
     <url>/2020/06/24/What-is-The-Cuckoo-Attack/</url>
     <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The cuckoo bird replaces other birds’ eggs with its own. The victim birds are tricked into feeding the cuckoo chick as if it were their own.Similarly, in a cuckoo attack, the attacker “replaces” the victim’s <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment" target="_blank" rel="noopener">TEE</a> with his own TEE, leading the victim to treat the attacker’s TEE as his own.</p>
+<a id="more"></a>
+
 <p>Specifically, <strong>the attacker try to convinces the victim that a TEE physically controled by the adversary resides in the victim’s own local computer</strong>.</p>
 <p>How it can be achieved?</p>
 <p>In most TEE’s protocal, attestation for TEE is achieved by special TEE, the special TEE only certifies that the code is running on <em>some</em> genuine TEE processor, but it does not guarantee that where is the processor actually located. Adversary can take advantage of this shortcoming to achieve cuckoo attack.</p>
