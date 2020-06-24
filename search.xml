@@ -58,6 +58,56 @@
       </tags>
   </entry>
   <entry>
+    <title>What is The Cuckoo Attack</title>
+    <url>/2020/06/24/What-is-The-Cuckoo-Attack/</url>
+    <content><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The cuckoo bird replaces other birds’ eggs with its own. The victim birds are tricked into feeding the cuckoo chick as if it were their own.Similarly, in a cuckoo attack, the attacker “replaces” the victim’s <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment" target="_blank" rel="noopener">TEE</a> with his own TEE, leading the victim to treat the attacker’s TEE as his own.</p>
+<p>Specifically, <strong>the attacker try to convinces the victim that a TEE physically controled by the adversary resides in the victim’s own local computer</strong>.</p>
+<p>How it can be achieved?</p>
+<p>In most TEE’s protocal, attestation for TEE is achieved by special TEE, the special TEE only certifies that the code is running on <em>some</em> genuine TEE processor, but it does not guarantee that where is the processor actually located. Adversary can take advantage of this shortcoming to achieve cuckoo attack.</p>
+<p>In the following picture, there is a malware on the victim’s computer, it proxies all messages between user and TEE in his machine. When user want to attestation a TEE on his own computer, the malware intercept this message and forward to TEE on attacker’s machine, and then a special TEE on attacker’s computer generate a proof to prove the TEE on attacker’s machine is an authentic TEE.</p>
+<p>As a result, the victim are convinced that the TEE on attacker’s machine resides in his own local computer, and trust it. In this case, Any secrets victim enters can be forwarded to attacker’s TEE, attacker can steal the secrets by some means (such as phycial means).</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg35tanyf3j31wk0u0dk5.jpg" alt="image-20200624101517944"></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li>Parno, Bryan. “Bootstrapping Trust in a” Trusted” Platform.” HotSec. 2008.</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Security</category>
+        <category>TEE</category>
+        <category>Attacks</category>
+      </categories>
+      <tags>
+        <tag>Attacks</tag>
+        <tag>TEE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode 1114 Print in Order, sample concurrency in Python</title>
+    <url>/2019/10/21/leetcode-1114-Print-in-Order-sample-concurrency-in-Python/</url>
+    <content><![CDATA[<h1 id="leetcode-1114-Print-in-Order-sample-concurrency-in-Python"><a href="#leetcode-1114-Print-in-Order-sample-concurrency-in-Python" class="headerlink" title="leetcode 1114 Print in Order, sample concurrency in Python"></a>leetcode 1114 Print in Order, sample concurrency in Python</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><blockquote>
+<p>Suppose we have a class:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Foo &#123;</span><br><span class="line">  public void first() &#123; print(&quot;first&quot;); &#125;</span><br><span class="line">  public void second() &#123; print(&quot;second&quot;); &#125;</span><br><span class="line">  public void third() &#123; print(&quot;third&quot;); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The same instance of <code>Foo</code> will be passed to three different threads. Thread A will call <code>first()</code>, thread B will call <code>second()</code>, and thread C will call <code>third()</code>. Design a mechanism and modify the program to ensure that <code>second()</code> is executed after <code>first()</code>, and <code>third()</code> is executed after <code>second()</code>.</p>
+</blockquote>
+<a id="more"></a>
+
+<p>Print in order is a simple concurrency programming problem, especially in Python. But it’s my first concurrency program in Python, so record in here.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>I simply use <strong>two locks</strong> to achieve synchoronization.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">    lock1 = threading.Lock()</span><br><span class="line">    lock2 = threading.Lock()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.lock1.acquire()</span><br><span class="line">        self.lock2.acquire()</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">first</span><span class="params">(self, printFirst: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># printFirst() outputs "first". Do not change or remove this line.</span></span><br><span class="line">        printFirst()</span><br><span class="line">        self.lock1.release()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">second</span><span class="params">(self, printSecond: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.lock1.acquire()</span><br><span class="line">        <span class="comment"># printSecond() outputs "second". Do not change or remove this line.</span></span><br><span class="line">        printSecond()</span><br><span class="line">        self.lock1.release()</span><br><span class="line">        self.lock2.release()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">third</span><span class="params">(self, printThird: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.lock2.acquire()</span><br><span class="line">        <span class="comment"># printThird() outputs "third". Do not change or remove this line.</span></span><br><span class="line">        printThird()</span><br><span class="line">        self.lock2.release()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Coding</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>concurrency</tag>
+        <tag>multithreading</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Producer-consumer problem solution in C</title>
     <url>/2019/10/21/Producer-consumer-problem-solution-in-C/</url>
     <content><![CDATA[<h1 id="Producer-consumer-problem-multiprocessing-solution-in-C-with-details"><a href="#Producer-consumer-problem-multiprocessing-solution-in-C-with-details" class="headerlink" title="Producer-consumer problem multiprocessing solution in C with details"></a>Producer-consumer problem multiprocessing solution in C with details</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p><a href="[https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem](https://en.wikipedia.org/wiki/Producer–consumer_problem)"><strong>Producer-consumer problem</strong></a> is a classical problem in concurrency programming, I want to solve it by multiprocessing method. Multiprocessing method need more knowledges than multithreading method, because different process need to communicate with each other. </p>
@@ -110,32 +160,6 @@
         <tag>Producer-consumer problem</tag>
         <tag>multiprocessing</tag>
         <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>leetcode 1114 Print in Order, sample concurrency in Python</title>
-    <url>/2019/10/21/leetcode-1114-Print-in-Order-sample-concurrency-in-Python/</url>
-    <content><![CDATA[<h1 id="leetcode-1114-Print-in-Order-sample-concurrency-in-Python"><a href="#leetcode-1114-Print-in-Order-sample-concurrency-in-Python" class="headerlink" title="leetcode 1114 Print in Order, sample concurrency in Python"></a>leetcode 1114 Print in Order, sample concurrency in Python</h1><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><blockquote>
-<p>Suppose we have a class:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Foo &#123;</span><br><span class="line">  public void first() &#123; print(&quot;first&quot;); &#125;</span><br><span class="line">  public void second() &#123; print(&quot;second&quot;); &#125;</span><br><span class="line">  public void third() &#123; print(&quot;third&quot;); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>The same instance of <code>Foo</code> will be passed to three different threads. Thread A will call <code>first()</code>, thread B will call <code>second()</code>, and thread C will call <code>third()</code>. Design a mechanism and modify the program to ensure that <code>second()</code> is executed after <code>first()</code>, and <code>third()</code> is executed after <code>second()</code>.</p>
-</blockquote>
-<a id="more"></a>
-
-<p>Print in order is a simple concurrency programming problem, especially in Python. But it’s my first concurrency program in Python, so record in here.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>I simply use <strong>two locks</strong> to achieve synchoronization.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">    lock1 = threading.Lock()</span><br><span class="line">    lock2 = threading.Lock()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.lock1.acquire()</span><br><span class="line">        self.lock2.acquire()</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">first</span><span class="params">(self, printFirst: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># printFirst() outputs "first". Do not change or remove this line.</span></span><br><span class="line">        printFirst()</span><br><span class="line">        self.lock1.release()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">second</span><span class="params">(self, printSecond: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.lock1.acquire()</span><br><span class="line">        <span class="comment"># printSecond() outputs "second". Do not change or remove this line.</span></span><br><span class="line">        printSecond()</span><br><span class="line">        self.lock1.release()</span><br><span class="line">        self.lock2.release()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">third</span><span class="params">(self, printThird: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self.lock2.acquire()</span><br><span class="line">        <span class="comment"># printThird() outputs "third". Do not change or remove this line.</span></span><br><span class="line">        printThird()</span><br><span class="line">        self.lock2.release()</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Coding</category>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>concurrency</tag>
-        <tag>multithreading</tag>
       </tags>
   </entry>
 </search>

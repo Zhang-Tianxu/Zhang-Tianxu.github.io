@@ -293,6 +293,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/24/What-is-The-Cuckoo-Attack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhang Tianxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZTX's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/24/What-is-The-Cuckoo-Attack/" itemprop="url">What is The Cuckoo Attack</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-24T09:43:32+00:00">
+                2020-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Security</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Security/TEE/" itemprop="url" rel="index">
+                    <span itemprop="name">TEE</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Security/TEE/Attacks/" itemprop="url" rel="index">
+                    <span itemprop="name">Attacks</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The cuckoo bird replaces other birds’ eggs with its own. The victim birds are tricked into feeding the cuckoo chick as if it were their own.Similarly, in a cuckoo attack, the attacker “replaces” the victim’s <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment" target="_blank" rel="noopener">TEE</a> with his own TEE, leading the victim to treat the attacker’s TEE as his own.</p>
+<p>Specifically, <strong>the attacker try to convinces the victim that a TEE physically controled by the adversary resides in the victim’s own local computer</strong>.</p>
+<p>How it can be achieved?</p>
+<p>In most TEE’s protocal, attestation for TEE is achieved by special TEE, the special TEE only certifies that the code is running on <em>some</em> genuine TEE processor, but it does not guarantee that where is the processor actually located. Adversary can take advantage of this shortcoming to achieve cuckoo attack.</p>
+<p>In the following picture, there is a malware on the victim’s computer, it proxies all messages between user and TEE in his machine. When user want to attestation a TEE on his own computer, the malware intercept this message and forward to TEE on attacker’s machine, and then a special TEE on attacker’s computer generate a proof to prove the TEE on attacker’s machine is an authentic TEE.</p>
+<p>As a result, the victim are convinced that the TEE on attacker’s machine resides in his own local computer, and trust it. In this case, Any secrets victim enters can be forwarded to attacker’s TEE, attacker can steal the secrets by some means (such as phycial means).</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg35tanyf3j31wk0u0dk5.jpg" alt="image-20200624101517944"></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li>Parno, Bryan. “Bootstrapping Trust in a” Trusted” Platform.” HotSec. 2008.</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/Google-Kick-Start-2018-Round-A-Even-Digits/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -810,7 +983,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -821,7 +994,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -832,7 +1005,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -885,7 +1058,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
