@@ -84,7 +84,7 @@
 <meta property="og:site_name" content="ZTX&#39;s Blog">
 <meta property="og:description" content="I am like a cat, but I like dogs.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-08T04:00:06.352Z">
+<meta property="og:updated_time" content="2021-03-08T04:15:16.255Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -306,6 +306,42 @@
               <a href="/tags/Attacks/" style="font-size: 12px; color: #ccc">Attacks</a> <a href="/tags/C/" style="font-size: 12px; color: #ccc">C</a> <a href="/tags/Google-Kick-Start/" style="font-size: 12px; color: #ccc">Google Kick Start</a> <a href="/tags/Producer-consumer-problem/" style="font-size: 12px; color: #ccc">Producer-consumer problem</a> <a href="/tags/Python/" style="font-size: 30px; color: #111">Python</a> <a href="/tags/TEE/" style="font-size: 12px; color: #ccc">TEE</a> <a href="/tags/concurrency/" style="font-size: 30px; color: #111">concurrency</a> <a href="/tags/multiprocessing/" style="font-size: 12px; color: #ccc">multiprocessing</a> <a href="/tags/multithreading/" style="font-size: 30px; color: #111">multithreading</a>
             </div>
           </div>
+        <script type="text/javascript">
+     var alltags = document.getElementsByClassName('tag-cloud-tags');
+     var tags = alltags[0].getElementsByTagName('a');
+     for (var i = tags.length - 1; i >= 0; i--) {
+       var r=Math.floor(Math.random()*75+130);
+       var g=Math.floor(Math.random()*75+100);
+       var b=Math.floor(Math.random()*75+80);
+       tags[i].style.background = "rgb("+r+","+g+","+b+")";
+     }
+</script>
+
+<style>
+  .tag-cloud-tags{
+    /*font-family: Helvetica, Tahoma, Arial;*/
+    /*font-weight: 100;*/
+    text-align: center;
+    counter-reset: tags;
+  }
+  .tag-cloud-tags a{
+    border-radius: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin: 8px 5px 0px 0px;
+  }
+  .tag-cloud-tags a:before{
+    content: "";
+  }
+
+  .tag-cloud-tags a:hover{
+     box-shadow: 0px 5px 15px 0px rgba(0,0,0,.4);
+     transform: scale(1.1);
+     /*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/
+     transition-duration: 0.15s;
+  }
+</style>
+
         
       </div>
       
